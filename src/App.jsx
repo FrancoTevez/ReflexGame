@@ -12,15 +12,15 @@ function App() {
 
   function funcFrase(){
     if(Math.round((contador / 10) * 100) / 100 < 3){
-      setFrase("Xq tocaste terminar si no terminaste?") 
+      setFrase("Es casi imposible meter este tiempo!") 
     }else if(Math.round((contador / 10) * 100) / 100 >= 3 && Math.round((contador / 10) * 100) / 100 < 4){
       setFrase("Sos una bestia, mira el tiempo que metiste!")
     }else if(Math.round((contador / 10) * 100) / 100 >= 4 && Math.round((contador / 10) * 100) / 100 < 5.5){
       setFrase("Estás muy rápido, no estás jugando desde el celu no?")
     }else if(Math.round((contador / 10) * 100) / 100 >= 5.5 && Math.round((contador / 10) * 100) / 100 < 8){
-      setFrase("Metiste un buen tiempo, pero podés mejorarlo papá")
+      setFrase("Metiste un buen tiempo, pero podés mejorarlo!")
     }else{
-      setFrase("Sos un desastre... Intentá de nuevo te lo pido por favor.")
+      setFrase("No es un buen tiempo, intentalo de nuevo!")
     }
   }
 
