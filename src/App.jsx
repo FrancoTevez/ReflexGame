@@ -86,7 +86,7 @@ function App() {
       </div>
       <div className='contenedorFigura'>
         {play == "reiniciar" && <h2>{frase}</h2>}
-        {play == "jugar" && <h2>Hacé 10 clicks en el menor tiempo posible papito dale.</h2>}
+        {play == "jugar" && <h2>Hacé 10 clicks en el menor tiempo posible!</h2>}
         {play == "terminar" && <figure onClick={clickFigura} style={{top: `${position[0]}%`, left: `${position[1]}%`, height: `${48 - score * 2}px`, width: `${48 - score * 2}px`, animation: `${animation} 0.2s`, backgroundColor: `${colores}`}}></figure>}
       </div>
       <div className='contToques'>
