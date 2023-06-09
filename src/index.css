@@ -1,0 +1,158 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#root{
+  width: 100%;
+  
+  height: 100vh;
+}
+
+body{
+  background-color: rgb(55, 52, 85);
+}
+
+h2{
+  display: flex;
+  color: rgb(241, 241, 241);
+  place-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+span{
+  font-size: 20px;
+  margin: 40px 20px 20px;
+  color: rgb(241, 241, 241);
+}
+
+.contenedor{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.contenedorFigura{ 
+  box-sizing: border-box;
+  padding: 48px;
+  background-color: rgb(27, 27, 58);
+  width: 80%;
+  border-radius: 20px;
+  border: 5px solid rgba(25, 1, 56, 0.411);
+  height: 80%;
+  position: relative;
+}
+
+.botonJuego{
+  margin-bottom: 40px;
+  border: 0;
+  outline: 0;
+  font-size: 20px;
+  padding: 8px 15px;
+  border-bottom: 4px solid rgba(25, 1, 56, 0.411);
+  border-right: 4px solid rgba(25, 1, 56, 0.411);
+  border-radius: 8px;
+  background-color: rgb(27, 27, 58);
+  color: rgb(241, 241, 241);
+  cursor: pointer;
+}
+
+.botonJuego:active{
+  padding-right: 19px;
+  padding-bottom: 12px;
+  border: 0;
+}
+
+.contColores{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 10px;
+  width: 80%;
+  margin-right: 15px;
+}
+
+.botonColores{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid rgba(25, 1, 56, 0.411);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.botonColores:active{
+  transform: scale(.9);
+}
+
+.crimson{
+  background-color: crimson;
+}
+
+.white{
+  background-color: white;
+}
+
+.yellow{
+  background-color: yellow;
+}
+
+.sienna{
+  background-color: sienna;
+}
+
+.skyblue{
+  background-color: skyblue;
+}
+
+.violet{
+  background-color: blueviolet;
+}
+
+p{
+  color: rgb(241, 241, 241);
+  font-size: 20px;
+  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.contToques{
+  width: 80%;
+  display: flex;
+  justify-content: end;
+}
+
+figure{
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  position: absolute;
+  transition: all .2s ease;
+}
+
+figure:active{
+  transform: scale(.9);
+}
+
+@keyframes aparece2 {
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+@keyframes aparece {
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
