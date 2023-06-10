@@ -9,21 +9,22 @@ function App() {
   const [animation, setAnimation] = useState("aparece")
   const [colores, setColores] = useState("crimson")
   const [frase, setFrase] = useState("")
+  const [dificultad, setDificultad] = useState("48px")
 
   function funcFrase(){
     if(Math.round((contador / 10) * 100) / 100 < 3){
-      setFrase("Es casi imposible meter este tiempo!") 
+      setFrase("¡Es casi imposible meter este tiempo!") 
     }else if(Math.round((contador / 10) * 100) / 100 >= 3 && Math.round((contador / 10) * 100) / 100 < 4){
-      setFrase("Sos una bestia, mira el tiempo que metiste!")
+      setFrase("Sos una bestia, !Mira el tiempo que metiste!")
     }else if(Math.round((contador / 10) * 100) / 100 >= 4 && Math.round((contador / 10) * 100) / 100 < 5.5){
-      setFrase("Estás muy rápido, no estás jugando desde el celu no?")
+      setFrase("Estás muy rápido, ¿No estás jugando desde el celu no?")
     }else if(Math.round((contador / 10) * 100) / 100 >= 5.5 && Math.round((contador / 10) * 100) / 100 < 8){
-      setFrase("Metiste un buen tiempo, pero podés mejorarlo!")
+      setFrase("Metiste un buen tiempo, ¡Pero podés mejorarlo!")
     }else{
-      setFrase("No es un buen tiempo, intentalo de nuevo!")
+      setFrase("¡No es un buen tiempo, intentalo de nuevo!")
     }
   }
-
+  
   useEffect(() => {
     let interval;
     if(play == "reiniciar"){
@@ -77,17 +78,25 @@ function App() {
     <div className='contenedor'>
       <span>{Math.round((contador / 10) * 100) / 100} segundos</span>
       <div className='contColores'>
-        <button type='button' className='botonColores crimson' onClick={() => setColores("crimson")}></button>
-        <button type='button' className='botonColores white' onClick={() => setColores("white")}></button>
-        <button type='button' className='botonColores yellow' onClick={() => setColores("yellow")}></button>
-        <button type='button' className='botonColores sienna' onClick={() => setColores("sienna")}></button>
-        <button type='button' className='botonColores skyblue' onClick={() => setColores("skyblue")}></button>
-        <button type='button' className='botonColores violet' onClick={() => setColores("blueviolet")}></button>
+        <div className='contDificultad'>
+          <button type='button' className={`botonDificultad BDextreme ${dificultad == "15px" && "bActivo"}`} onClick={() => setDificultad("15px")} >EXTREME</button>
+          <button type='button' className={`botonDificultad BDhard ${dificultad == "30px" && "bActivo"}`} onClick={() => setDificultad("30px")}>HARD</button>
+          <button type='button' className={`botonDificultad BDmedium ${dificultad == "48px" && "bActivo"}`} onClick={() => setDificultad("48px")}>MEDIUM</button>
+          <button type='button' className={`botonDificultad BDeasy ${dificultad == "60px" && "bActivo"}`} onClick={() => setDificultad("60px")}>EASY</button>
+        </div>
+        <div>
+          <button type='button' className='botonColores crimson' onClick={() => setColores("crimson")} style={{width: `${colores == "crimson" ? 32 : 25}px`, height: `${colores == "crimson" ? 32 : 25}px`}}></button>
+          <button type='button' className='botonColores white' onClick={() => setColores("white")} style={{width: `${colores == "white" ? 32 : 25}px`, height: `${colores == "white" ? 32 : 25}px`}}></button>
+          <button type='button' className='botonColores yellow' onClick={() => setColores("yellow")} style={{width: `${colores == "yellow" ? 32 : 25}px`, height: `${colores == "yellow" ? 32 : 25}px`}}></button>
+          <button type='button' className='botonColores sienna' onClick={() => setColores("sienna")} style={{width: `${colores == "sienna" ? 32 : 25}px`, height: `${colores == "sienna" ? 32 : 25}px`}}></button>
+          <button type='button' className='botonColores skyblue' onClick={() => setColores("skyblue")} style={{width: `${colores == "skyblue" ? 32 : 25}px`, height: `${colores == "skyblue" ? 32 : 25}px`}}></button>
+          <button type='button' className='botonColores violet' onClick={() => setColores("blueviolet")} style={{width: `${colores == "blueviolet" ? 32 : 25}px`, height: `${colores == "blueviolet" ? 32 : 25}px`}}></button>
+        </div>
       </div>
       <div className='contenedorFigura'>
         {play == "reiniciar" && <h2>{frase}</h2>}
         {play == "jugar" && <h2>Hacé 10 clicks en el menor tiempo posible!</h2>}
-        {play == "terminar" && <figure onClick={clickFigura} style={{top: `${position[0]}%`, left: `${position[1]}%`, height: `${48 - score * 2}px`, width: `${48 - score * 2}px`, animation: `${animation} 0.2s`, backgroundColor: `${colores}`}}></figure>}
+        {play == "terminar" && <figure onClick={clickFigura} style={{top: `${position[0]}%`, left: `${position[1]}%`, height: `${dificultad}`, width: `${dificultad}`, animation: `${animation} 0.2s`, backgroundColor: `${colores}`}}></figure>}
       </div>
       <div className='contToques'>
         <p>TOQUES: {score - 1}</p>
