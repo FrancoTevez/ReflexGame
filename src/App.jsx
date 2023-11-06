@@ -6,19 +6,23 @@ function App() {
   const [contador, setContador] = useState(0)
   const [score, setScore] = useState(1)
   const [position, setPosition] = useState([])
+  const [position2, setPosition2] = useState([])
+  const [position3, setPosition3] = useState([])
   const [animation, setAnimation] = useState("aparece")
+  const [animation2, setAnimation2] = useState("aparece")
+  const [animation3, setAnimation3] = useState("aparece")
   const [colores, setColores] = useState("crimson")
   const [frase, setFrase] = useState("")
   const [dificultad, setDificultad] = useState("48px")
 
   function funcFrase(){
-    if(Math.round((contador / 10) * 100) / 100 < 3){
+    if(Math.round((contador / 10) * 100) / 100 < 5){
       setFrase("¡Es casi imposible meter este tiempo!") 
-    }else if(Math.round((contador / 10) * 100) / 100 >= 3 && Math.round((contador / 10) * 100) / 100 < 4){
+    }else if(Math.round((contador / 10) * 100) / 100 >= 3 && Math.round((contador / 10) * 100) / 100 < 8){
       setFrase("Sos una bestia, !Mira el tiempo que metiste!")
-    }else if(Math.round((contador / 10) * 100) / 100 >= 4 && Math.round((contador / 10) * 100) / 100 < 5.5){
+    }else if(Math.round((contador / 10) * 100) / 100 >= 4 && Math.round((contador / 10) * 100) / 100 < 10){
       setFrase("Estás muy rápido, ¿No estás jugando desde el celu no?")
-    }else if(Math.round((contador / 10) * 100) / 100 >= 5.5 && Math.round((contador / 10) * 100) / 100 < 8){
+    }else if(Math.round((contador / 10) * 100) / 100 >= 5.5 && Math.round((contador / 10) * 100) / 100 < 14){
       setFrase("Metiste un buen tiempo, ¡Pero podés mejorarlo!")
     }else{
       setFrase("¡No es un buen tiempo, intentalo de nuevo!")
@@ -34,17 +38,37 @@ function App() {
     }
     if(play == "terminar"){ 
       setScore(1)
-      let top =  Math.floor(Math.random() * 100)
-      let left = Math.floor(Math.random() * 100)
-      if(top > 80){
-        top -= 10
+      for (let i = 1; i < 4; i++) {
+        let top =  Math.floor(Math.random() * 100)
+        let left = Math.floor(Math.random() * 100)
+        if(top > 80){
+          if(dificultad == "100px"){
+            top -= 15
+          }else{
+            top -= 10
+          }
+        }
+        if(left > 80){
+          if(dificultad == "100px"){
+            left -= 15
+          }else{
+            left -= 10
+          }
+        }  
+        if(i == 1){
+          setPosition([
+           top, left
+         ])
+       }else if(i == 2){
+         setPosition2([
+           top, left
+         ])
+       }else{
+         setPosition3([
+           top, left
+         ])
+       }
       }
-      if(left > 80){
-        left -= 10
-      }
-      setPosition([
-        top, left
-      ])
       setContador(0)
     }
     if(play == "terminar"){
@@ -52,23 +76,44 @@ function App() {
     }
 
     return () => clearInterval(interval)
-  }, [play])
+  }, [play, dificultad])
   
-  function clickFigura() {
-    animation == "aparece" ? setAnimation("aparece2") : setAnimation("aparece")
+  function clickFigura(num) {
     setScore((prevScore) => prevScore + 1)
     let top =  Math.floor(Math.random() * 100)
     let left = Math.floor(Math.random() * 100)
     if(top > 80){
-      top -= 10
+      if(dificultad == "100px"){
+        top -= 15
+      }else{
+        top -= 10
+      }
     }
     if(left > 80){
-      left -= 10
+      if(dificultad == "100px"){
+        left -= 15
+      }else{
+        left -= 10
+      }
+    }  
+    if(num == 1){
+       setPosition([
+        top, left
+      ])
+      animation == "aparece" ? setAnimation("aparece2") : setAnimation("aparece")
+    }else if(num == 2){
+      setPosition2([
+        top, left
+      ])
+      animation == "aparece" ? setAnimation2("aparece2") : setAnimation2("aparece")
+    }else{
+      setPosition3([
+        top, left
+      ])
+      animation == "aparece" ? setAnimation3("aparece2") : setAnimation3("aparece")
     }
-    setPosition([
-      top, left
-    ])
-    if(score == 10){
+   
+    if(score == 30){
       funcFrase()
       setPlay("reiniciar")
     }
@@ -82,7 +127,7 @@ function App() {
           <button type='button' className={`botonDificultad BDextreme ${dificultad == "15px" && "bActivo"}`} onClick={() => setDificultad("15px")} >EXTREME</button>
           <button type='button' className={`botonDificultad BDhard ${dificultad == "30px" && "bActivo"}`} onClick={() => setDificultad("30px")}>HARD</button>
           <button type='button' className={`botonDificultad BDmedium ${dificultad == "48px" && "bActivo"}`} onClick={() => setDificultad("48px")}>MEDIUM</button>
-          <button type='button' className={`botonDificultad BDeasy ${dificultad == "60px" && "bActivo"}`} onClick={() => setDificultad("60px")}>EASY</button>
+          <button type='button' className={`botonDificultad BDeasy ${dificultad == "100px" && "bActivo"}`} onClick={() => setDificultad("100px")}>EASY</button>
         </div>
         <div>
           <button type='button' className='botonColores crimson' onClick={() => setColores("crimson")} style={{width: `${colores == "crimson" ? 32 : 25}px`, height: `${colores == "crimson" ? 32 : 25}px`}}></button>
@@ -95,8 +140,10 @@ function App() {
       </div>
       <div className='contenedorFigura'>
         {play == "reiniciar" && <h2>{frase}</h2>}
-        {play == "jugar" && <h2>Hacé 10 clicks en el menor tiempo posible!</h2>}
-        {play == "terminar" && <figure onClick={clickFigura} style={{top: `${position[0]}%`, left: `${position[1]}%`, height: `${dificultad}`, width: `${dificultad}`, animation: `${animation} 0.2s`, backgroundColor: `${colores}`}}></figure>}
+        {play == "jugar" && <h2>Hacé 30 clicks en el menor tiempo posible!</h2>}
+        {play == "terminar" && <><figure onClick={() => clickFigura(1)} style={{top: `${position[0]}%`, left: `${position[1]}%`, height: `${dificultad}`, width: `${dificultad}`, animation: `${animation} 0.2s`, backgroundColor: `${colores}`}}></figure>
+        <figure onClick={() => clickFigura(2)} style={{top: `${position2[0]}%`, left: `${position2[1]}%`, height: `${dificultad}`, width: `${dificultad}`, animation: `${animation2} 0.2s`, backgroundColor: `${colores}`}}></figure>
+        <figure onClick={() => clickFigura(3)} style={{top: `${position3[0]}%`, left: `${position3[1]}%`, height: `${dificultad}`, width: `${dificultad}`, animation: `${animation3} 0.2s`, backgroundColor: `${colores}`}}></figure></> }
       </div>
       <div className='contToques'>
         <p>TOQUES: {score - 1}</p>
